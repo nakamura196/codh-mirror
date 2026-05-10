@@ -1,0 +1,46 @@
+@charset "UTF-8";
+/*
+ * IIIF Curation Manager v1.0
+ * http://codh.rois.ac.jp/software/iiif-curation-manager/
+ *
+ * Copyright 2018 Center for Open Data in the Humanities, Research Organization of Information and Systems
+ * Released under the MIT license
+ *
+ * Core contributor: Jun HOMMA (@2SC1815J)
+ *
+ * Licenses of open source libraries, see acknowledgements.txt
+ */
+.container-custom {
+  padding:15px;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, "Arial", "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif;
+}
+
+@media print {
+  .container-custom {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+#guide_message {
+  margin-top: 0px;
+}
+
+#datatable_error {
+  margin: 5px;
+  padding: 5px;
+}
+
+.userdocs_reload {
+  margin-bottom: 10px;
+}
+
+.userdocs_boardLink {
+  margin-left: 7px;
+}
+.userdocs_playLink {
+  margin-left: 7px;
+}
+.userdocs_download {
+  margin-left: 7px;
+}

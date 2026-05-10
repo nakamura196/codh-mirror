@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="vdiffseqjs/vdiff-seq.bundle.css">
+    <title>vdiff-seq.js - JavaScript-based visual differencing tool for sequential images</title>
+    <script src="vdiffseqjs/vdiff-seq.bundle.min.js"></script>
+  </head>
+  <body>
+    <div id="vdiff_seq"></div>
+    <script>
+      (function() {
+        VDiffSeq({
+          id: 'vdiff_seq'
+        });
+      })();
+    </script>
+    <script src="opencv/opencv-4.5.1.js" async></script>
+  </body>
+</html>

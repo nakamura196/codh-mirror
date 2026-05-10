@@ -1,0 +1,32 @@
+@charset "UTF-8";
+/*
+ * IIIF Curation Editor v1.0
+ * http://codh.rois.ac.jp/software/iiif-curation-editor/
+ *
+ * Copyright 2018 Center for Open Data in the Humanities, Research Organization of Information and Systems
+ * Released under the MIT license
+ *
+ * Core contributor: Jun HOMMA (@2SC1815J)
+ *
+ * Licenses of open source libraries, see acknowledgements.txt
+ */
+.container-custom {
+  padding:15px;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, "Arial", "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif;
+}
+
+@media print {
+  .container-custom {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+#jsoneditor {
+  border: 1px solid #eee;
+  height: calc(100vh - 170px);
+}
+
+#jsoneditor_footer {
+  margin-top: 10px;
+}

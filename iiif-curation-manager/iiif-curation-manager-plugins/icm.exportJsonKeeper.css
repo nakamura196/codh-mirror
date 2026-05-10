@@ -1,0 +1,17 @@
+@charset "UTF-8";
+/*
+ * IIIF Curation Manager - JSONkeeper export plugin
+ * http://codh.rois.ac.jp/software/iiif-curation-manager/
+ *
+ * Copyright 2018 Center for Open Data in the Humanities, Research Organization of Information and Systems
+ * Released under the MIT license
+ *
+ * Core contributor: Jun HOMMA (@2SC1815J)
+ */
+#export_json_keeper_alert {
+  margin-top: 10px;
+}
+
+.btn-icv-export-not-logged-in::after {
+  content: attr(data-notloggedin);
+}

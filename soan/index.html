@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="現代日本語テキストをくずし字画像に変換する「そあん（soan）」の機能拡張版です。">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@2SC1815J">
+    <meta property="og:title" content="そあん（soan）プロフェッショナル版">
+    <meta property="og:description" content="現代日本語テキストをくずし字画像に変換する「そあん（soan）」の機能拡張版です。">
+    <meta property="og:url" content="https://dev.2sc1815j.net/soan/">
+    <meta property="og:image" content="https://dev.2sc1815j.net/soan/ogp.jpg">
+    <meta property="og:site_name" content="2SC1815J">
+    <link rel="canonical" href="https://dev.2sc1815j.net/soan/">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500&family=Noto+Serif+JP:wght@200&display=swap">
+    <link rel="stylesheet" href="soan/soan.bundle.min.css">
+    <link rel="stylesheet" href="soan_pro.css">
+    <script src="soan/soan.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/spin.js@2.3.2/spin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/spin.js@2.3.2/jquery.spin.min.js"></script>
+    <title data-en="Soan Pro: Library for rendering modern Japanese text using old movable type">そあん（soan）プロフェッショナル版</title>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row min-vh-100 flex-column flex-sm-row flex-nowrap flex-sm-wrap">
+        <div class="col-sm-auto bg-light soan-pro-header px-sm-3 border-bottom">
+
+          <div class="d-flex flex-column flex-sm-row flex-wrap justify-content-center justify-content-sm-start align-items-center py-3">
+            <a href="." class="d-flex align-items-center text-center link-body-emphasis text-decoration-none">
+              <span class="d-none d-sm-inline">
+                <img src="soan.png" class="soan-pro-image py-2" title="そあん（soan）プロフェッショナル版 / Soan Pro: Library for rendering modern Japanese text using old movable type" alt="そあん / soan">
+              </span>
+              <span class="d-sm-none">
+                <span class="fs-5" data-en="Soan Pro: Library for Rendering Modern Japanese Text Using Old Movable Type">そあん（soan）プロフェッショナル版</span>
+              </span>
+            </a>
+            <ul class="nav mx-sm-0">
+              <li class="nav-item d-none d-sm-flex">
+                <span class="nav-link px-0"><a class="link-body-emphasis text-decoration-none" href="about.html" target="_blank" title="そあん（soan）プロフェッショナル版について / About Soan Pro">？</a></span>
+              </li>
+              <li class="nav-item">
+                <span class="nav-link px-0 pb-0"><a class="link-body-emphasis text-decoration-none" href="?lang=ja">日本語</a> <span class="link-body-emphasis">/</span> <a class="link-body-emphasis text-decoration-none" href="?lang=en">English</a>
+                </span>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+
+        <div class="col-sm pt-3 px-3 px-sm-5 d-flex flex-column flex-grow-1 soan-pro-main-column">
+
+          <main>
+            <div class="row d-none d-sm-flex"><span class="fs-5" data-en="Soan Pro">そあん（soan）プロフェッショナル版</span></div>
+
+            <div class="row mt-2 mb-3" id="soan_wrapper">
+              <div class="col">
+                <form id="text_form" method="GET">
+                  <div class="mb-3">
+                    <label for="input_text" class="form-label" data-en="Enter the text you wish to generate &lt;i&gt;kuzushiji&lt;/i&gt; image.">くずし字画像化するテキストを入力してください。</label>
+                    <textarea class="form-control" id="input_text" rows="3"></textarea>
+                    <div class="invalid-feedback" id="feedback_msg"><span id="feedback_msg1"></span><span id="feedback_msg2" data-en=" Please enter other contents or check the &quot;Use of fonts&quot; checkbox in &quot;Options&quot;." style="display: none;">他の内容で入力するか、「設定」の「フォントの使用」チェックボックスをオンにしてください。</span></div>
+                    <div class="d-flex justify-content-between my-2">
+                      <div>
+                        <button type="button" class="btn btn-light btn-sm" id="clear_text" data-en="Clear">クリア</button>
+                        <button type="button" class="btn btn-light btn-sm" id="set_sample_text" data-en="Sample Text" style="display: none;">サンプルテキスト</button>
+                      </div>
+                      <div>
+                        <button type="button" class="btn btn-outline-primary" data-bs-toggle="collapse" data-bs-target="#options_collapse" aria-expanded="false" aria-controls="options_collapse" data-en="Options">設定</button>
+                        <button type="submit" class="btn btn-primary" id="create_image" data-en="Generate Image" disabled>画像生成</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="mb-3">
+                    <div id="options_collapse" class="collapse">
+                      <div class="card card-body">
+                        <fieldset class="mb-2">
+                          <legend class="col-form-label pt-0" data-en="Early Middle Japanese mode">古文モード</legend>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="1" name="use_remote_tokenizer" id="use_remote_tokenizer">
+                            <label class="form-check-label" for="use_remote_tokenizer" data-en="Run morphological analysis on the server side as Early Middle Japanese text">テキストを古文（中古和文）としてサーバ側で形態素解析する</label>
+                          </div>
+                        </fieldset>
+                        <fieldset class="mb-2">
+                          <legend class="col-form-label pt-0" data-en="Use of fonts">フォントの使用</legend>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="1" name="allow_unavailable_char" id="allow_unavailable_char">
+                            <label class="form-check-label" for="allow_unavailable_char" data-en="Use fonts to draw symbols for which movable type images are not available">古活字画像が登録されていない記号等をフォントで代用する</label>
+                          </div>
+                        </fieldset>
+                        <fieldset class="mb-2">
+                          <legend class="col-form-label" data-en="Use of &lt;i&gt;remmen&lt;/i&gt; (ligature typeface)">連綿（続け字）の使用</legend>
+                          <div class="row ms-0">
+                            <div class="form-check col-sm">
+                              <input class="form-check-input" type="radio" name="renmen_priority" id="renmen_0" value="0">
+                              <label class="form-check-label" for="renmen_0" data-en="As few as possible">できるだけ少なく</label>
+                            </div>
+                            <div class="form-check col-sm">
+                              <input class="form-check-input" type="radio" name="renmen_priority" id="renmen_50" value="50">
+                              <label class="form-check-label" for="renmen_50" data-en="Random">ランダム</label>
+                            </div>
+                            <div class="form-check col-sm">
+                              <input class="form-check-input" type="radio" name="renmen_priority" id="renmen_100" value="100" checked>
+                              <label class="form-check-label" for="renmen_100" data-en="As much as possible">できるだけ多く</label>
+                            </div>
+                          </div>
+                        </fieldset>
+                        <fieldset class="mb-2">
+                          <legend class="col-form-label" data-en="Characters per line">行長（字詰め数）</legend>
+                          <div class="row ms-0">
+                            <div class="form-check col-sm">
+                              <select class="form-select" name="chars_per_line">
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20" selected>20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">24</option>
+                                <option value="25">25</option>
+                                <option value="26">26</option>
+                                <option value="27">27</option>
+                                <option value="28">28</option>
+                                <option value="29">29</option>
+                                <option value="30">30</option>
+                                <option value="31">31</option>
+                                <option value="32">32</option>
+                                <option value="33">33</option>
+                                <option value="34">34</option>
+                                <option value="35">35</option>
+                              </select>
+                            </div>
+                          </div>
+                        </fieldset>
+                        <fieldset class="mb-2">
+                          <legend class="col-form-label" data-en="Line gap">行間</legend>
+                          <div class="row ms-0">
+                            <div class="form-check col-sm">
+                              <input class="form-check-input" type="radio" name="line_gap" id="line_gap_25" value="25">
+                              <label class="form-check-label" for="line_gap_25" data-en="Quarter em space">25%（四分）</label>
+                            </div>
+                            <div class="form-check col-sm">
+                              <input class="form-check-input" type="radio" name="line_gap" id="line_gap_50" value="50" checked>
+                              <label class="form-check-label" for="line_gap_50" data-en="Half em space">50%（二分）</label>
+                            </div>
+                            <div class="form-check col-sm">
+                              <input class="form-check-input" type="radio" name="line_gap" id="line_gap_75" value="75">
+                              <label class="form-check-label" for="line_gap_75" data-en="3/4 em space">75%（二分四分）</label>
+                            </div>
+                          </div>
+                        </fieldset>
+                        <fieldset class="mb-2">
+                          <legend class="col-form-label" data-en="Margin">余白</legend>
+                          <div class="row">
+                            <div class="col">
+                              <label for="margin_top" class="form-label mb-1" data-en="Top">天</label>
+                              <select class="form-select" name="margin_top" id="margin_top">
+                                <option value="10" data-en="0.1 em">0.1文字分</option>
+                                <option value="100" data-en="1 em">1文字分</option>
+                                <option value="300" data-en="3 em">3文字分</option>
+                                <option value="500" data-en="5 em">5文字分</option>
+                              </select>
+                            </div>
+                            <div class="col">
+                              <label for="margin_bottom" class="form-label mb-1" data-en="Bottom">地</label>
+                              <select class="form-select" name="margin_bottom" id="margin_bottom">
+                                <option value="10" data-en="0.1 em">0.1文字分</option>
+                                <option value="100" data-en="1 em">1文字分</option>
+                                <option value="300" data-en="3 em">3文字分</option>
+                                <option value="500" data-en="5 em">5文字分</option>
+                              </select>
+                            </div>
+                            <div class="col">
+                              <label for="margin_left" class="form-label mb-1" data-en="Left">左</label>
+                              <select class="form-select" name="margin_left" id="margin_left">
+                                <option value="10" data-en="0.1 em">0.1文字分</option>
+                                <option value="100" data-en="1 em">1文字分</option>
+                                <option value="300" data-en="3 em">3文字分</option>
+                                <option value="500" data-en="5 em">5文字分</option>
+                              </select>
+                            </div>
+                            <div class="col">
+                              <label for="margin_right" class="form-label mb-1" data-en="Right">右</label>
+                              <select class="form-select" name="margin_right" id="margin_right">
+                                <option value="10" data-en="0.1 em">0.1文字分</option>
+                                <option value="100" data-en="1 em">1文字分</option>
+                                <option value="300" data-en="3 em">3文字分</option>
+                                <option value="500" data-en="5 em">5文字分</option>
+                              </select>
+                            </div>
+                          </div>
+                        </fieldset>
+                        <fieldset class="mb-2">
+                          <legend class="col-form-label" data-en="Scale of output image">生成画像サイズ倍率</legend>
+                          <div class="row ms-0">
+                            <div class="form-check col">
+                              <input class="form-check-input" type="radio" name="canvas_scale" id="canvas_scale_25" value="25">
+                              <label class="form-check-label" for="canvas_scale_25" data-en="25%">25%</label>
+                            </div>
+                            <div class="form-check col">
+                              <input class="form-check-input" type="radio" name="canvas_scale" id="canvas_scale_50" value="50">
+                              <label class="form-check-label" for="canvas_scale_50" data-en="50%">50%</label>
+                            </div>
+                            <div class="form-check col">
+                              <input class="form-check-input" type="radio" name="canvas_scale" id="canvas_scale_100" value="100" checked>
+                              <label class="form-check-label" for="canvas_scale_100" data-en="100%">100%</label>
+                            </div>
+                          </div>
+                        </fieldset>
+                        <fieldset class="mb-2 hide-for-exhibition">
+                          <legend class="col-form-label" data-en="Gamma correction for movable type images">古活字画像のガンマ補正</legend>
+                          <div class="row ms-0">
+                            <div class="form-check col-sm">
+                              <select class="form-select" name="gamma">
+                                <option value="1" data-en="0.1 (darker)">0.1（暗くなる）</option>
+                                <option value="2">0.2</option>
+                                <option value="3">0.3</option>
+                                <option value="4">0.4</option>
+                                <option value="5">0.5</option>
+                                <option value="6">0.6</option>
+                                <option value="7">0.7</option>
+                                <option value="8">0.8</option>
+                                <option value="9">0.9</option>
+                                <option value="10" selected>1.0</option>
+                                <option value="11">1.1</option>
+                                <option value="12">1.2</option>
+                                <option value="13">1.3</option>
+                                <option value="14">1.4</option>
+                                <option value="15">1.5</option>
+                                <option value="16">1.6</option>
+                                <option value="17">1.7</option>
+                                <option value="18">1.8</option>
+                                <option value="19">1.9</option>
+                                <option value="20">2.0</option>
+                                <option value="21">2.1</option>
+                                <option value="22" data-en="2.2 (brighter)">2.2（明るくなる）</option>
+                              </select>
+                            </div>
+                          </div>
+                        </fieldset>
+                        <fieldset class="mb-2">
+                          <legend class="col-form-label" data-en="Paper pattern">紙の模様</legend>
+                          <div class="row ms-0">
+                            <div class="form-check col-sm">
+                              <input class="form-check-input" type="radio" name="paper_pattern" id="pattern_0" value="0" checked>
+                              <label class="form-check-label" for="pattern_0" data-en="Random">ランダム</label>
+                            </div>
+                            <div class="form-check col-sm">
+                              <input class="form-check-input" type="radio" name="paper_pattern" id="pattern_1" value="1">
+                              <label class="form-check-label" for="pattern_1" data-en="Pattern 1">素紙</label>
+                            </div>
+                            <div class="form-check col-sm">
+                              <input class="form-check-input" type="radio" name="paper_pattern" id="pattern_2" value="2">
+                              <label class="form-check-label" for="pattern_2" data-en="Pattern 2">乱れ薄</label>
+                            </div>
+                            <div class="form-check col-sm">
+                              <input class="form-check-input" type="radio" name="paper_pattern" id="pattern_3" value="3">
+                              <label class="form-check-label" for="pattern_3" data-en="Pattern 3">波</label>
+                            </div>
+                            <div class="form-check col-sm">
+                              <input class="form-check-input" type="radio" name="paper_pattern" id="pattern_4" value="4">
+                              <label class="form-check-label" for="pattern_4" data-en="Pattern 4">梅の立枝</label>
+                            </div>
+                          </div>
+                        </fieldset>
+                        <fieldset class="mb-2">
+                          <legend class="col-form-label pt-0" data-en="Seed">シード値</legend>
+                          <input class="form-control" type="text" id="random_seed">
+                        </fieldset>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <div class="row mt-3 mb-5">
+              <div class="col" id="rendered_text_wrapper" style="display: none;">
+                <div id="rendered_text_canvas_wrapper" class="soan-rendered-text-canvas-wrapper"></div>
+                <div id="used_random_seed"></div>
+                <button type="button" class="btn btn-outline-secondary mt-3" id="download_image" data-en="Download">画像ダウンロード</button>
+                <button type="button" class="btn btn-outline-secondary mt-3" data-bs-toggle="collapse" data-bs-target="#rendered_text" aria-expanded="false" aria-controls="rendered_text" data-en="Text">画像テキスト</button>
+                <div id="rendered_text" class="collapse my-3 soan-rendered-text border rounded p-3"></div>
+                <button type="button" class="btn btn-outline-secondary mt-3" data-bs-toggle="collapse" data-bs-target="#rendered_text_id" aria-expanded="false" aria-controls="rendered_text_id" data-en="ID">古活字画像ID</button>
+                <div id="rendered_text_id" class="collapse my-3 soan-rendered-text border rounded p-3" contenteditable="true"></div>
+              </div>
+            </div>
+
+            <div class="row my-3">
+              <div class="mb-3">
+                <span data-en="Soan Pro is a professional version of &lt;a href='http://codh.rois.ac.jp/software/soan/' target='_blank'&gt;Soan&lt;/a&gt;, a library that renders modern Japanese text using old movable type, with the additional features listed below (&lt;a href='about.html' target='_blank'&gt;detail&lt;/a&gt;).">くずし字画像変換「<a href="http://codh.rois.ac.jp/software/soan/" target="_blank">そあん（soan）</a>」に以下の機能を加えた拡張版です（<a href="about.html" target="_blank">詳しい説明</a>）</span>
+              </div>
+
+              <ul class="list-unstyled">
+                <ul>
+                  <li data-en="Feature to specify &lt;i&gt;jibo&lt;/i&gt;, &lt;i&gt;renmen&lt;/i&gt; and break in morphological analysis using full-width square brackets and half-width slashes">字母・連綿・字形（古活字画像ID）、形態素解析の切れ目を指定する機能
+                    <ul>
+                      <li>字母・連綿・字形の指定：全角の角括弧（［］）</li>
+                      <li>形態素解析の切れ目の指定：半角のスラッシュ（/）</li>
+                      <li>利用可能な字母・連綿・字形の検索：「<a href="https://dev.2sc1815j.net/soan/kwic/" target="_blank">古活字データセット簡易KWIC検索</a>」</li>
+                    </ul>
+                  </li>
+                  <li data-en="Feature for morphological analysis as Early Middle Japanese text on the server side using the UniDic for Early Middle Japanese ver.2023.08">テキストを古文（中古和文）としてサーバ側で形態素解析する機能（古文モード）</li>
+                  <li data-en="Feature to specify seed value">シード値の指定機能</li>
+                  <li data-en="Feature to adjust the image position">古活字画像の位置調整機能（簡易的）
+                    <ul>
+                      <li>生成画像内の文字にマウスを重ね、矢印キーで位置調整ができます</li>
+                      <li>矢印キー：1/20移動、Ctrl＋矢印キー：1/100移動、Shift＋矢印キー：1/2移動</li>
+                    </ul>
+                  </li>
+                  <li data-en="Feature to link with KWIC search">古活字画像の検索と差し替え機能
+                    <ul>
+                      <li>生成画像内の文字クリックから、他に利用可能な古活字画像の検索と差し替えが行えます</li>
+                    </ul>
+                  </li>
+                </ul>
+              </ul>
+
+              <div>
+                <p class="h6" data-en="Notice"></p>
+                <div data-en="This demo generates an image in the user's browser."></div>
+                <div data-en="In normal mode, the text you enter is not sent to the server."></div>
+                <div data-en="In Early Middle Japanese mode, the entered text is sent to the server, but is not recorded."></div>
+                <div data-en="If multiple movable type images are available, a different image will be generated for each generation.">複数の古活字画像が利用できる場合、生成ごとに異なる画像が生成されます。</div>
+                <div data-en="The generated images can be used freely.">生成した画像は自由に利用できます。</div>
+              </div>
+            </div>
+          </main>
+
+          <footer class="mt-auto py-2">
+            <div class="text-center">
+              <span class="text-body-secondary"><small>Copyright © 2023 <a href="https://2sc1815j.net/">2SC1815J</a></small></span>
+            </div>
+          </footer>
+
+        </div>
+      </div>
+    </div>
+    <script src="index.js"></script>
+  </body>
+</html>

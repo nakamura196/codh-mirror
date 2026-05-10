@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async="async" src="https://www.googletagmanager.com/gtag/js?id=UA-89206154-1"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-89206154-1');</script>
+<script async="true" src="https://www.googletagmanager.com/gtag/js?id=G-TYZYR2JP8H"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-TYZYR2JP8H');</script>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="leaflet/leaflet-1.6.0/leaflet.css">
+  <link rel="stylesheet" href="leaflet/Leaflet.fullscreen/leaflet.fullscreen.css">
+  <link rel="stylesheet" href="leaflet/Leaflet.draw/leaflet.draw.css">
+  <link rel="stylesheet" href="leaflet/Leaflet.contextmenu/leaflet.contextmenu.min.css">
+  <link rel="stylesheet" href="leaflet/Leaflet.EasyButton/easy-button.css">
+  <link rel="stylesheet" href="leaflet/leaflet-sidebar/L.Control.Sidebar.css">
+  <link rel="stylesheet" href="bootstrap/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="bootstrap/bootstrap3-editable/css/bootstrap-editable.css">
+  <link rel="stylesheet" href="fontawesome/css/all.min.css">
+  <link rel="stylesheet" href="iiif-curation-viewer/viewer.css">
+  <link rel="stylesheet" href="iiif-curation-viewer/header_footer.css">
+  <link rel="stylesheet" href="iiif-curation-viewer/annotation.css">
+  <!--
+  <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
+  <link rel="mask-icon" href="favicons/favicon-black.svg" color="#3F415E">
+  <link rel="icon" type="image/vnd.microsoft.icon" href="favicons/favicon.ico">
+  <link rel="icon" type="image/svg+xml" sizes="any" href="favicons/favicon.svg">
+  -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <script src="spin/spin.min.js"></script>
+  <script src="jquery/jquery-1.12.4.min.js"></script>
+  <script src="jquery/jquery.spin.js"></script>
+  <script src="leaflet/leaflet-1.6.0/leaflet.js"></script>
+  <script src="leaflet/Leaflet.fullscreen/Leaflet.fullscreen.min.js"></script>
+  <script src="leaflet/Leaflet.draw/leaflet.draw.js"></script>
+  <script src="leaflet/Leaflet.contextmenu/leaflet.contextmenu.min.js"></script>
+  <script src="leaflet/Leaflet.EasyButton/easy-button.js"></script>
+  <script src="leaflet/leaflet-sidebar/L.Control.Sidebar.js"></script>
+  <script src="bootstrap/bootstrap/js/bootstrap.min.js"></script>
+  <script src="bootstrap/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+  <script src="lz-string/lz-string.min.js"></script>
+  <script src="raphael/raphael.min.js"></script>
+  <script src="lodash/lodash.core.min.js"></script>
+  <script src="lazysizes/lazysizes.min.js"></script>
+  <title>IIIF Curation Board</title>
+  <!-- Licenses of open source libraries, see iiif-curation-viewer/acknowledgements.txt -->
+</head>
+<body>
+  <header class="navbar navbar-default navbar-custom-header">
+    <div class="container container-custom-header">
+      <div class="navbar-header navbar-header-custom-header">
+        <button class="navbar-toggle navbar-toggle-custom-header collapsed" type="button" data-toggle="collapse" data-target="#navbar_lang">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <!-- Organization name, collection name, project name, etc. -->
+        <a id="navbar_brand" class="navbar-brand navbar-brand-custom-header" href="."><span class="icp_navbar_brand_logo"></span>IIIF Curation Board</a>
+      </div>
+      <div id="navbar_lang" class="collapse navbar-collapse navbar-collapse-custom-header">
+        <ul id="navbar_lang_ul" class="nav navbar-nav navbar-nav-custom navbar-right">
+          <li class="nav_export"><button type="button" class="btn btn-default btn-icv-export-svg" id="curation_list_export_svg"><span class="glyphicon glyphicon-download-alt"></span> SVG</button></li>
+          <li class="nav_export"><button type="button" class="btn btn-default btn-icv-export" id="curation_list_export">Export</button></li>
+          <li class="nav_lang_ja navbar-text navbar-text-custom-header">日本語</li>
+          <li class="nav_lang_en navbar-text navbar-text-custom-header"><a href="#">English</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <div class="container container-custom">
+    <h2 id="book_title">IIIF Curation Board</h2>
+    <div id="iiif_curation_board">
+      <div id="image_canvas" class="no_contents">
+        <div id="usage_tip_wrapper">
+          <span id="usage_tip"></span>
+        </div>
+        <div id="url_pasteable"></div>
+      </div>
+    </div>
+  </div>
+  <script src="IIIF-Commons/manifesto/manifesto.js"></script>
+  <script src="icp-commons/prezi-compat.min.js"></script>
+  <script src="iiif-curation-viewer/viewer.js"></script>
+  <script src="index.js"></script>
+
+  <!-- IIIF Curation Viewer - Firebase authentication plugin -->
+  <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-auth.js"></script>
+  <link rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.4.1/firebaseui.css">
+  <script>
+    if (typeof iiifViewer !== 'undefined' && iiifViewer.getLang() !== 'ja') {
+      document.write(unescape('%3Cscript src="https://cdn.firebase.com/libs/firebaseui/3.4.1/firebaseui.js"%3E%3C/script%3E'));
+    } else {
+      document.write(unescape('%3Cscript src="https://www.gstatic.com/firebasejs/ui/3.4.1/firebase-ui-auth__ja.js"%3E%3C/script%3E'));
+    }
+  </script>
+  <link rel="stylesheet" href="iiif-curation-viewer-plugins/icv.authFirebase.css">
+  <script src="iiif-curation-viewer-plugins/icv.authFirebase.js"></script>
+  <script src="authFirebase.js"></script>
+
+  <!-- IIIF Curation Viewer - JSONkeeper export plugin -->
+  <link rel="stylesheet" href="iiif-curation-viewer-plugins/icv.exportJsonKeeper.css">
+  <script src="iiif-curation-viewer-plugins/icv.exportJsonKeeper.js"></script>
+  <script src="exportJsonKeeper.js"></script>
+
+  <!-- IIIF Curation Viewer - Curation list export plugin -->
+  <script src="iiif-curation-viewer-plugins/icv.exportCurationList.js"></script>
+  <script src="exportCurationList.js"></script>
+
+  <footer class="navbar-inverse navbar-custom-footer">
+    <div class="container container-custom-footer">
+      <!-- Organization link, License, etc. -->
+      <p class="navbar-text navbar-text-custom-footer text-center"><a href="http://codh.rois.ac.jp/" class="navbar-link">Center for Open Data in the Humanities</a>, <a href="http://ds.rois.ac.jp/" class="navbar-link">Research Organization of Information and Systems</a>. Powered by <a href="http://codh.rois.ac.jp/software/iiif-curation-board/" class="navbar-link">IIIF Curation Board</a>.</p>
+    </div>
+  </footer>
+</body>
+</html>

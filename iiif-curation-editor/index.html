@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+<script async="async" src="https://www.googletagmanager.com/gtag/js?id=UA-89206154-1"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-89206154-1');</script>
+<script async="true" src="https://www.googletagmanager.com/gtag/js?id=G-TYZYR2JP8H"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-TYZYR2JP8H');</script>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="bootstrap/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="jsoneditor/jsoneditor_custom.min.css">
+    <link rel="stylesheet" href="iiif-curation-editor/editor.css">
+    <link rel="stylesheet" href="iiif-curation-editor/header_footer.css">
+    <!--
+    <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
+    <link rel="mask-icon" href="favicons/favicon-black.svg" color="#3F415E">
+    <link rel="icon" type="image/vnd.microsoft.icon" href="favicons/favicon.ico">
+    <link rel="icon" type="image/svg+xml" sizes="any" href="favicons/favicon.svg">
+    -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <script src="jquery/jquery-1.12.4.min.js"></script>
+    <script src="bootstrap/bootstrap/js/bootstrap.min.js"></script>
+    <script src="jsoneditor/jsoneditor.min.js"></script>
+    <title>IIIF Curation Editor</title>
+    <!-- Licenses of open source libraries, see iiif-curation-editor/acknowledgements.txt -->
+  </head>
+  <body>
+
+    <header class="navbar navbar-default navbar-custom-header">
+      <div class="container container-custom-header">
+        <div class="navbar-header navbar-header-custom-header">
+          <button class="navbar-toggle navbar-toggle-custom-header collapsed" type="button" data-toggle="collapse" data-target="#navbar_header">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <!-- Organization name, collection name, project name, etc. -->
+          <a id="navbar_brand" class="navbar-brand navbar-brand-custom-header" href="."><span class="icp_navbar_brand_logo"></span>IIIF Curation Editor</a>
+        </div>
+        <div id="navbar_header" class="collapse navbar-collapse navbar-collapse-custom-header">
+            <ul id="navbar_header_ul" class="nav navbar-nav navbar-nav-custom navbar-right">
+              <li id="navbar_lang_li">
+                <ul id="navbar_lang_ul" class="nav navbar-nav navbar-nav-custom navbar-nav-custom2">
+                  <li class="nav_lang_ja navbar-text navbar-text-custom-header">日本語</li>
+                  <li class="nav_lang_en navbar-text navbar-text-custom-header"><a href="#">English</a></li>
+                </ul>
+              </li>
+              <li id="navbar_login_li"></li>
+              <li id="navbar_help_li" class="navbar-text-custom-header"><a id="navbar_help_link" href="#">Help</a></li>
+            </ul>
+        </div>
+      </div>
+    </header>
+
+    <div class="container container-custom">
+      <div id="iiif-curation-editor">
+        <div id="editor_container" class="export_container">
+          <div id="jsoneditor">
+          </div>
+          <div id="jsoneditor_footer">
+            <div id="jsoneditor_footer_buttons" class="pull-right">
+              <button id="json_export" type="button" class="btn btn-default btn-icv-export">Save</button>
+            </div>
+          </div>
+        </div>
+        <div id="json_url_form_container">
+          <form id="json_url_form" action=".">
+            <div class="input-group">
+              <input id="json_url" name="curation" type="text" class="form-control" placeholder="Curation URL">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="submit" id="json_url_form_submit">Go!</button>
+              </span>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="iiif-curation-editor/editor.js"></script>
+    <script src="iiif-curation-editor/curationSchema.js"></script>
+    <script src="index.js"></script>
+
+    <!-- IIIF Curation Editor - Firebase authentication plugin -->
+    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-auth.js"></script>
+    <link rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.4.1/firebaseui.css">
+    <script>
+      if (typeof iiifEditor !== 'undefined' && iiifEditor.getLang() !== 'ja') {
+        document.write(unescape('%3Cscript src="https://cdn.firebase.com/libs/firebaseui/3.4.1/firebaseui.js"%3E%3C/script%3E'));
+      } else {
+        document.write(unescape('%3Cscript src="https://www.gstatic.com/firebasejs/ui/3.4.1/firebase-ui-auth__ja.js"%3E%3C/script%3E'));
+      }
+    </script>
+    <link rel="stylesheet" href="iiif-curation-editor-plugins/ice.authFirebase.css">
+    <script src="iiif-curation-editor-plugins/ice.authFirebase.js"></script>
+    <script src="authFirebase.js"></script>
+
+    <!-- IIIF Curation Editor - JSONkeeper export plugin -->
+    <link rel="stylesheet" href="iiif-curation-editor-plugins/ice.exportJsonKeeper.css">
+    <script src="iiif-curation-editor-plugins/ice.exportJsonKeeper.js"></script>
+    <script src="exportJsonKeeper.js"></script>
+    
+    <footer class="navbar-inverse navbar-custom-footer">
+      <div class="container container-custom-footer">
+        <!-- Organization link, License, etc. -->
+        <p class="navbar-text navbar-text-custom-footer text-center"><a href="http://codh.rois.ac.jp/" class="navbar-link">Center for Open Data in the Humanities</a>, <a href="http://ds.rois.ac.jp/" class="navbar-link">Research Organization of Information and Systems</a>. Powered by <a href="http://codh.rois.ac.jp/software/iiif-curation-editor/" class="navbar-link">IIIF Curation Editor</a>.</p>
+      </div>
+    </footer>
+
+  </body>
+</html>

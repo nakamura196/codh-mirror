@@ -1,0 +1,302 @@
+@charset "UTF-8";
+/*
+ * IIIF Curation Board v1.0
+ * http://codh.rois.ac.jp/software/iiif-curation-board/
+ *
+ * Copyright 2020 Center for Open Data in the Humanities, Research Organization of Information and Systems
+ * Released under the MIT license
+ *
+ * Core contributor: Jun HOMMA (@2SC1815J)
+ *
+ * Licenses of open source libraries, see acknowledgements.txt
+ */
+.icv-annotation-div-icon-thumbnail {
+  width: 100px;
+  height: 100px;
+  outline: none;
+}
+.icv-annotation-div-icon > .icv-annotation-div-icon-thumbnail > img {
+  max-width: 100% !important;
+  max-height: 100% !important;
+}
+.icv-annotation-div-icon .icv-annotation-div-icon-thumbnail > img {
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.65);
+}
+.icv-annotation-div-icon-dragging .icv-annotation-div-icon-thumbnail > img {
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.65);
+}
+.icv-annotation-div-icon-dragging > .icv-annotation-div-icon-thumbnail > img  {
+  margin-top: 0 !important;
+  margin-left: 0 !important;
+}
+.icv-annotation-div-icon-selected {
+  outline-style: none; /*restoreOutline()に関連して、chrome向けに必要*/
+}
+.icv-annotation-div-icon-selected .icv-annotation-div-icon-thumbnail > img {
+  margin-top: 1px;
+  margin-left: 1px;
+  outline: #3388ff groove 2px;
+  outline-offset: -1px;
+}
+
+/* 付箋 */
+.icv-annotation-div-sticky {
+  width: 16.5em;
+  height: 4em;
+  padding: 1em 1.5em;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  background-color: #ffffb3;
+  font-size: 1em;
+  line-height: 1.8;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  position: relative;
+}
+.icv-annotation-div-sticky-close {
+  font-size: 20px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.icv-annotation-div-sticky-dragging > .icv-annotation-div-sticky {
+  margin-top: 0 !important;
+  margin-left: 0 !important;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4);
+}
+.icv-annotation-div-sticky-selected > .icv-annotation-div-sticky {
+  margin-top: 1px;
+  margin-left: 1px;
+  outline: #3388ff groove 2px; 
+  /*outline-offset: -1px;*/
+}
+.icv-annotation-div-sticky .editable-input {
+  width: 100%;
+}
+.icv-annotation-div-sticky .editable-input > input {
+  width: 100%;
+}
+.icv-annotation-div-sticky .editable-container.editable-inline {
+  width: 100%;
+}
+.icv-annotation-div-sticky .editable-container.editable-inline .control-group.form-group {
+  width: 100%;
+}
+.icv-annotation-div-sticky .editable-container.editable-inline input {
+  height: 2em;
+  margin-left: -4px;  
+  padding: 5px 5px;
+}
+
+/* Leaflet.draw */
+.leaflet-draw-draw-areaselect {
+  background-image: none !important;
+}
+.leaflet-draw-draw-areaselect::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f5cb";
+}
+.leaflet-draw-draw-sticky {
+  background-image: none !important;
+  background-clip: border-box !important;
+}
+.leaflet-draw-draw-sticky::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 400;
+  content: "\f249";
+}
+.leaflet-draw-draw-sheet {
+  background-image: none !important;
+}
+.leaflet-draw-draw-sheet::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f5fd";
+}
+.leaflet-draw-draw-frame {
+  background-image: none !important;
+}
+.leaflet-draw-draw-frame::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f5ee";
+}
+
+/* https://jfly.uni-koeln.de/colorset/ */
+.uni-red {
+  color: rgba(255,75,0,1)
+}
+.uni-yellow {
+  color: rgba(255,241,0,1)
+}
+.uni-green {
+  color: rgba(3,175,122,1)
+}
+.uni-blue {
+  color: rgba(0,90,255,1)
+}
+.uni-sky {
+  color: rgba(77,196,255,1)
+}
+.uni-pink {
+  color: rgba(255,128,130,1)
+}
+.uni-orange {
+  color: rgba(246,170,0,1)
+}
+.uni-purple {
+  color: rgba(153,0,153,1)
+}
+.uni-brown {
+  color: rgba(128,64,0,1)
+}
+
+/* シール */
+.seals-container {
+  position: absolute;
+  bottom: 0;
+  -webkit-text-stroke: 1px #FFF;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.65);
+}
+.seals-container-sticky {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  line-height: 1.5;
+}
+.seal {
+  margin-left: 2px;
+  margin-right: 2px;
+}
+.icv-annotation-div-sticky-dragging > .seals-container-sticky {
+  margin-left: 0 !important;
+  margin-left: 0 !important;
+}
+.icv-annotation-div-sticky-selected > .seals-container-sticky {
+  margin-left: 1px;
+  margin-left: 1px;
+}
+
+/* 座布団 */
+.icv-annotation-div-icon-zabuton {
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  width: 102px;
+  height: calc(100px + 3em);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  background: rgba(255, 255, 255, 0.2);
+  z-index: -1;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+.icv-annotation-div-icon-label {
+  position: absolute;
+  bottom: 1.2em;
+  margin-bottom: 2px;
+  line-height: 1.2em;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.icv-annotation-div-icon-dragging > .icv-annotation-div-icon-zabuton {
+  margin-top: 0 !important;
+  margin-left: 0 !important;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.65);
+}
+.icv-annotation-div-icon-selected > .icv-annotation-div-icon-zabuton {
+  margin-top: 1px;
+  margin-left: 1px;
+}
+.icv-annotation-div-icon-dragging > .icv-annotation-div-icon-label {
+  margin-top: 2px !important;
+  margin-left: 0px !important;
+}
+.icv-annotation-div-icon-selected > .icv-annotation-div-icon-label {
+  margin-top: 2px;
+  margin-left: 1px;
+}
+.icv-annotation-div-icon-dragging > .seals-container-marker {
+  margin-left: 0px !important;
+}
+.icv-annotation-div-icon-selected > .seals-container-marker {
+  margin-left: 1px;
+}
+.icv-annotation-div-icon-zabuton-wrap > .seals-container {
+  position: static;
+}
+
+/* 下敷き */
+.icv-annotation-div-sheet {
+  width: 500px;
+  height: 500px;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+  position: relative;
+  cursor: grab;
+  border-radius: 0.25em;
+}
+.icv-annotation-div-sheet-close {
+  font-size: 12px;
+  position: absolute;
+  padding: 2px;
+  top: 0;
+  right: 0;
+}
+.icv-annotation-div-sheet-resizer {
+  font-size: 12px;
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+}
+.icv-annotation-div-sheet-resizer > span {
+  cursor: nwse-resize;
+}
+.icon-flipped {
+  transform: scaleX(-1);
+}
+.icv-annotation-div-sheet-mover {
+  font-size: 12px;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+}
+.icv-annotation-div-sheet-mover::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f111";
+}
+.icv-annotation-div-sheet-mover > span {
+  cursor: pointer;
+}
+
+.icv-annotation-div-sheet-dragging > .icv-annotation-div-sheet {
+  margin-top: -1px !important;
+  margin-left: -1px !important;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4);
+  cursor: grabbing;
+}
+.leaflet-dragging .icv-annotation-div-sheet {
+  cursor: grabbing;
+}
+.leaflet-drag-target.icv-annotation-div-sheet {
+  cursor: grabbing !important;
+}
+.icv-annotation-div-sheet-selected > .icv-annotation-div-sheet {
+  margin-top: -1px;
+  margin-left: -1px;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4);
+  outline: 2px groove #3388ff;
+  outline-offset: -1px;
+}
+.leaflet-sheet-pane > .icv-annotation-div-icon:focus {
+  outline: none !important; /*Chromeでのリサイズ時向け*/
+}
+.leaflet-sheet-hover-pane > .icv-annotation-div-icon:focus {
+  outline: none !important; /*Chromeでのリサイズ時向け*/
+}
