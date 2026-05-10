@@ -1,0 +1,17 @@
+@charset "UTF-8";
+/*
+ * Soan: Library for rendering modern Japanese using old movable type
+ * http://codh.rois.ac.jp/software/soan/
+ *
+ * Copyright 2023 Center for Open Data in the Humanities, Research Organization of Information and Systems
+ * Released under the MIT license
+ *
+ * Core contributor: Jun HOMMA (@2SC1815J)
+ */
+body {
+  font-family: "Noto Sans JP", sans-serif;
+}
+.soan-rendered-text {
+  font-family: "Noto Serif JP", serif;
+  font-weight: 200;
+}
