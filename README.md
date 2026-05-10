@@ -13,7 +13,7 @@ GitHub Pages で配信しています: <https://nakamura196.github.io/codh-mirro
 
 | パス | ツール | 配信URL |
 |---|---|---|
-| `vdiff-org/` | vdiff.js — 2 枚画像の差分可視化 | <https://nakamura196.github.io/codh-mirror/vdiff-org/> |
+| `vdiff/` | vdiff.js — 2 枚画像の差分可視化 | <https://nakamura196.github.io/codh-mirror/vdiff/> |
 | `vdiff-seq/` | vdiff-seq.js — 連続画像版 vdiff | <https://nakamura196.github.io/codh-mirror/vdiff-seq/> |
 | `iiif-curation-viewer/` | IIIF Curation Viewer | <https://nakamura196.github.io/codh-mirror/iiif-curation-viewer/> |
 | `iiif-curation-manager/` | IIIF Curation Manager | <https://nakamura196.github.io/codh-mirror/iiif-curation-manager/> |
@@ -37,7 +37,7 @@ GitHub Pages で配信しています: <https://nakamura196.github.io/codh-mirro
 
 | ツール | 取得日（Wayback timestamp） |
 |---|---|
-| vdiff-org | 2025-08-22 / 2025-10-08 |
+| vdiff | 2025-08-22 / 2025-10-08 |
 | vdiff-seq | 2024-09-09 |
 | iiif-curation-viewer | 2026-01-05 |
 | iiif-curation-manager | 2025-07-03 |
