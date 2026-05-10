@@ -1,6 +1,6 @@
 # codh-mirror
 
-ROIS-DS 人文学オープンデータ共同利用センター（CODH）が `codh.rois.ac.jp` で公開していたブラウザベースのデモアプリ群を、CODH 公式サイトが長期メンテナンス中（2026 年 2 月 16 日夕方よりサービス停止、再開時期未定）の間に利用できるよう、Wayback Machine から取得した原本を**暫定的に**ミラーホストするためのリポジトリです。
+ROIS-DS 人文学オープンデータ共同利用センター（CODH）が `codh.rois.ac.jp` で公開していたブラウザベースのデモアプリ群を、CODH 公式サイトが長期メンテナンス中（[ROIS-DS による 2026 年 2 月 24 日付公式アナウンス](https://ds.rois.ac.jp/news/2026/post-12061/)、再開時期未定）の間に利用できるよう、Wayback Machine から取得した原本を**暫定的に**ミラーホストするためのリポジトリです。
 
 GitHub Pages で配信しています: <https://nakamura196.github.io/codh-mirror/>
 
@@ -53,7 +53,7 @@ IIIF Curation Viewer / Manager / Editor / Board は、内部で **Firebase 認�
 
 ### CODH 提供のソフトウェア（vdiff / vdiff-seq / IIIF Curation 各種 / そあんの UI・バンドル等）
 
-**MIT License** — Copyright Center for Open Data in the Humanities, Research Organization of Information and Systems（core contributor: Jun HOMMA / [@2SC1815J](https://github.com/2SC1815J)）
+**MIT License** — Copyright Center for Open Data in the Humanities, Research Organization of Information and Systems（core contributor: Jun HOMMA（[@2SC1815J](https://github.com/2SC1815J)））
 
 ```
 Copyright Center for Open Data in the Humanities,
@@ -69,7 +69,7 @@ CODH 公開の **「古活字データセット」**（『徒然草』 国立国
 
 ### そあん同梱の kuromoji 形態素解析辞書（`soan/kuromoji/dict/*.dat.gz`、12 ファイル）
 
-[kuromoji.js](https://github.com/takuyaa/kuromoji.js) プロジェクトに含まれる標準辞書ファイルで、原典は **mecab-ipadic**（修正 BSD 相当）。kuromoji.js 自体は **Apache License 2.0** です。
+[kuromoji.js](https://github.com/takuyaa/kuromoji.js) プロジェクトに含まれる標準辞書ファイルで、原典は **mecab-ipadic**（NAIST 独自ライセンス + ICOT Free Software 条項。詳細は `mecab-ipadic/COPYING`）。kuromoji.js 自体は **Apache License 2.0** です。
 
 ### Pro 版バンドルは本ミラーに含まれていない
 
