@@ -49,10 +49,35 @@ IIIF Curation Viewer / Manager / Editor / Board は、内部で **Firebase 認�
 
 ## ライセンスと出典表示
 
-各ツールは CODH（および @2SC1815J 氏ほかコントリビュータ）が **MIT ライセンス** で公開されているものです。各ファイルの先頭コメントに含まれているライセンス・著作権表示はそのまま維持しています。
+本ミラーに含まれる成果物は権利関係が一様ではないので、構成要素ごとに以下のとおり整理しています。各ファイルの先頭コメントに含まれているライセンス・著作権表示はすべてそのまま維持しています。
 
-> Copyright Center for Open Data in the Humanities, Research Organization of Information and Systems
-> Released under the MIT license
+### CODH 提供のソフトウェア（vdiff / vdiff-seq / IIIF Curation 各種 / そあんの UI・バンドル等）
+
+**MIT License** — Copyright Center for Open Data in the Humanities, Research Organization of Information and Systems（core contributor: Jun HOMMA / [@2SC1815J](https://github.com/2SC1815J)）
+
+```
+Copyright Center for Open Data in the Humanities,
+  Research Organization of Information and Systems
+Released under the MIT license
+```
+
+### そあん同梱の古活字 PNG（`soan/dataset/001/*.png`、36,869 枚）
+
+CODH 公開の **「古活字データセット」**（『徒然草』 国立国会図書館蔵が原資料）の一部です。データセットそのもののライセンス詳細は CODH のデータセット紹介ページ (`https://codh.rois.ac.jp/soan/` 配下) に依存します。CODH 停止中のため詳細ページは参照できませんが、同センターによる従来の CC 系オープンデータポリシーに従って取り扱う前提です。CODH のサービス再開時に最新の表記を確認してください。
+
+なお、これらの画像バイナリは（CODH 停止中のため Wayback で全数取得が困難な事情で）@2SC1815J 氏が個人運用する `dev.2sc1815j.net` から取得して再配置しています。同氏ホストは中継配信であり、原権利者は変わりません。
+
+### そあん同梱の kuromoji 形態素解析辞書（`soan/kuromoji/dict/*.dat.gz`、12 ファイル）
+
+[kuromoji.js](https://github.com/takuyaa/kuromoji.js) プロジェクトに含まれる標準辞書ファイルで、原典は **mecab-ipadic**（修正 BSD 相当）。kuromoji.js 自体は **Apache License 2.0** です。
+
+### Pro 版バンドルは本ミラーに含まれていない
+
+そあんには `dev.2sc1815j.net/soan/` で公開されている拡張版（Soan Pro / Copyright 2023 Jun HOMMA）がありますが、Pro 版バンドル自体は明示的な再配布条件が公表されていないため、本ミラーには **含めていません**（CODH デモ版の MIT ライセンスのバンドルだけを利用）。dev.2sc1815j.net 由来のものは画像・辞書ファイルのバイナリのみで、これらの原権利は前述のとおり別出所です。
+
+### 生成画像のライセンス（参考）
+
+CODH の[そあんトップページ](https://codh.rois.ac.jp/soan/)には「そあんソフトウェアを利用して生成した画像は自由に利用可能、出所明示は不要」との記載があります（CODH のサービス停止中につき本記載は Wayback 経由での確認）。
 
 ## 取得元のスナップショット
 
@@ -86,6 +111,8 @@ CODH のサービスが再開した時点で、以下の段階で本ミラーを
 
 URL を生かしたまま archive で止めるのが、第三者の被リンクを壊さない無難な落とし所です。
 
-## CODH への謝意
+## 謝意
 
-本ミラーの存在自体が、CODH のソフトウェア・データセットの公開活動の上に成り立っています。サービス再開までの間だけ、本ミラーが必要な方の役に立てば幸いです。
+本ミラーの存在は、CODH と core contributor の Jun HOMMA（[@2SC1815J](https://github.com/2SC1815J)）氏が、長年にわたりソフトウェア・データセットをオープンに公開してこられたことの上に成り立っています。とりわけ、CODH 停止中に古活字 PNG と kuromoji 辞書を `dev.2sc1815j.net` から流用させていただいた件については、@2SC1815J 氏のホスト運営のおかげで本ミラー作業がそもそも成立した形であり、感謝に堪えません。
+
+サービス再開までの間だけ、本ミラーが必要な方の役に立てば幸いです。
