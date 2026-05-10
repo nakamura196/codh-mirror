@@ -24,6 +24,29 @@ GitHub Pages で配信しています: <https://nakamura196.github.io/codh-mirro
 
 各ツールはクエリパラメータ付きの URL で利用します（vdiff であれば `?img1=...&img2=...` など）。元の CODH デモページの URL クエリ仕様をそのまま継承しています。
 
+## ⚠️ 制約：認証・保存系の機能は動きません
+
+IIIF Curation Viewer / Manager / Editor / Board は、内部で **Firebase 認証** と **JSONkeeper**（CODH が運用していたキュレーション JSON 保存用バックエンド）に依存しています。本ミラーはあくまで静的アセットだけを置いたものなので、以下の機能は本ミラー経由では利用できません。
+
+| 機能 | 状態 | 備考 |
+|---|---|---|
+| Firebase ログイン（Google / Facebook / Twitter / Email） | ❌ 不可 | バンドルに CODH の Firebase プロジェクト `codh-81041` がハードコードされており、`nakamura196.github.io` は authDomain として登録されていないため、ログインポップアップが開いてもエラーになります |
+| キュレーションの新規作成 / 編集 / 保存 | ❌ 不可 | 認証に通っても、保存先 JSONkeeper API（`/api/...`）が CODH 側で停止中 |
+| 既存 Curation JSON の URL を渡しての**閲覧** | ✅ 可 | `?curation=<url>` 形式で公開されている JSON を渡せば Viewer / Player は読み取り専用で動作します |
+| 既存 Manifest の URL を渡しての**閲覧** | ✅ 可 | `?manifest=<url>&canvas=<id>&xywh=...` で領域強調表示も含めて Viewer は動作します |
+
+別ドメイン用の Firebase プロジェクトを立てて authFirebase.js を差し替えることは技術的には可能ですが、結局 JSONkeeper 側も自前で立てる必要があり、スコープが大きく膨らむ割に「CODH 復旧までの暫定対応」という本リポジトリの趣旨から外れるため、本ミラーでは行っていません。
+
+本ミラーで動作確認できる用途は以下の通りです。
+
+| ツール | 想定用途 |
+|---|---|
+| `vdiff/`, `vdiff-seq/` | 画像比較（クエリパラメータで2 画像 URL を指定） |
+| `soan/` | くずし字画像生成（フロントエンド完結、kuromoji 辞書同梱） |
+| `iiif-curation-viewer/` | `?manifest=...` または `?curation=...` 付きの閲覧 |
+| `iiif-curation-player/` | `?curation=...` 付きの閲覧（スライドショー） |
+| `iiif-curation-manager/` `iiif-curation-editor/` `iiif-curation-board/` | UI 確認程度（認証・保存は不可） |
+
 ## ライセンスと出典表示
 
 各ツールは CODH（および @2SC1815J 氏ほかコントリビュータ）が **MIT ライセンス** で公開されているものです。各ファイルの先頭コメントに含まれているライセンス・著作権表示はそのまま維持しています。
