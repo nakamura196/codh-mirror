@@ -9,12 +9,12 @@
  */
 var icvAuthFirebase = (function() {
     var firebaseConfig = {
-        apiKey: 'AIzaSyAcsAVeIJ5l2HCWY0OlCMxP-OVXodONYqA',
-        authDomain: 'codh-81041.firebaseapp.com',
-        databaseURL: 'https://codh-81041.firebaseio.com',
-        projectId: 'codh-81041',
-        storageBucket: 'codh-81041.appspot.com',
-        messagingSenderId: '230970439562'
+        apiKey: 'AIzaSyA00OT_063jEMYlKlqo4NA-IHFq0W03kZE',
+        authDomain: 'kunshujo-c.firebaseapp.com',
+        projectId: 'kunshujo-c',
+        storageBucket: 'kunshujo-c.firebasestorage.app',
+        messagingSenderId: '63469743049',
+        appId: '1:63469743049:web:be55201b9223b5e8a7d618'
     };
     var uiConfig = {
         signInFlow: 'popup',
