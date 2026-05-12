@@ -17,6 +17,7 @@ var icvAuthFirebase = (function() {
         appId: '1:63469743049:web:be55201b9223b5e8a7d618'
     };
     var uiConfig = {
+        signInFlow: 'popup',
         signInOptions: [
             firebase.auth.GoogleAuthProvider.PROVIDER_ID,
             firebase.auth.FacebookAuthProvider.PROVIDER_ID,
