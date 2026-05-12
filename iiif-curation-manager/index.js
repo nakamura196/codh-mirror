@@ -13,11 +13,11 @@ var iiifManager = (function() {
     var configExample = {
         generic: {
             service: {
-                curationJsonExportUrl: 'https://mp.ex.nii.ac.jp/api/curation/json',
-                curationViewerUrl: 'http://codh.rois.ac.jp/software/iiif-curation-viewer/demo/',
-                curationEditorUrl: 'http://codh.rois.ac.jp/software/iiif-curation-editor/demo/',
-                curationPlayerUrl: 'http://codh.rois.ac.jp/software/iiif-curation-player/demo/',
-                curationBoardUrl: 'http://codh.rois.ac.jp/software/iiif-curation-board/demo/'
+                curationJsonExportUrl: 'https://jsonkeeper.na-kamura-1263.workers.dev/api',
+                curationViewerUrl: '../iiif-curation-viewer/',
+                curationEditorUrl: '../iiif-curation-editor/',
+                curationPlayerUrl: '../iiif-curation-player/',
+                curationBoardUrl: '../iiif-curation-board/'
             }
         }
     };
