@@ -28,6 +28,15 @@ GitHub Pages で配信しています: <https://nakamura196.github.io/codh-mirro
 
 当初は「Firebase 認証と JSONkeeper 保存は CODH 純正のホストにハードコード依存のため動かない」としていましたが、その後 **自前の Firebase プロジェクトと JSONkeeper 互換 API を後付けで繋ぎ込み、現在は編集・保存系も動作します**。経緯と詳細は別記事 [codh-mirror に Firebase 認証と JSONkeeper 互換 API を後付けして IIIF Curation の編集ワークフローまで成立させる](https://tech.ldas.jp/ja/posts/codh-mirror-auth-storage-followup/) 参照。
 
+> **⚠️ デモ運用です — データの長期保存は保証しません**
+>
+> 本ミラーで提供している保存バックエンドは **デモ用途** での運用です。以下のタイミングで **予告なく停止する可能性があります**:
+>
+> - CODH のサービスが再開したとき (本ミラー自体の役目が終わるため)
+> - 運用者の都合 (運用負荷の見直し、Firebase プロジェクトの整理、料金プラン変更など)
+>
+> 保存したキュレーション JSON は、**こまめにエクスポート (ダウンロード) してご自身で保管してください**。継続的・本格的な利用が必要な方は、上記の記事を参考に **ご自身の環境で同等のバックエンドを立てる** ことを推奨します (Cloudflare Workers + D1 / PythonAnywhere いずれも個人の無料枠で完結します)。
+
 | 機能 | 状態 | 備考 |
 |---|---|---|
 | Firebase ログイン（Google / Facebook / Twitter / Email） | ✅ 可 | 自前の Firebase プロジェクトを再利用し authFirebase.js の `firebaseConfig` を差し替え。Authorized domains に `nakamura196.github.io` を追加済み。FirebaseUI 3.x の `signInFlow` を `popup` に明示することで GitHub Pages サブパス + クエリパラメータ環境でも完了するように修正 |
