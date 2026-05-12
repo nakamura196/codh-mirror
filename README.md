@@ -24,18 +24,18 @@ GitHub Pages で配信しています: <https://nakamura196.github.io/codh-mirro
 
 各ツールはクエリパラメータ付きの URL で利用します（vdiff であれば `?img1=...&img2=...` など）。元の CODH デモページの URL クエリ仕様をそのまま継承しています。
 
-## ⚠️ 制約：認証・保存系の機能は動きません
+## 認証・保存系の対応状況
 
-IIIF Curation Viewer / Manager / Editor / Board は、内部で **Firebase 認証** と **JSONkeeper**（CODH が運用していたキュレーション JSON 保存用バックエンド）に依存しています。本ミラーはあくまで静的アセットだけを置いたものなので、以下の機能は本ミラー経由では利用できません。
+当初は「Firebase 認証と JSONkeeper 保存は CODH 純正のホストにハードコード依存のため動かない」としていましたが、その後 **自前の Firebase プロジェクトと JSONkeeper 互換 API を後付けで繋ぎ込み、現在は編集・保存系も動作します**。経緯と詳細は別記事 [codh-mirror に Firebase 認証と JSONkeeper 互換 API を後付けして IIIF Curation の編集ワークフローまで成立させる](https://tech.ldas.jp/ja/posts/codh-mirror-auth-storage-followup/) 参照。
 
 | 機能 | 状態 | 備考 |
 |---|---|---|
-| Firebase ログイン（Google / Facebook / Twitter / Email） | ❌ 不可 | バンドルに CODH の Firebase プロジェクト `codh-81041` がハードコードされており、`nakamura196.github.io` は authDomain として登録されていないため、ログインポップアップが開いてもエラーになります |
-| キュレーションの新規作成 / 編集 / 保存 | ❌ 不可 | 認証に通っても、保存先 JSONkeeper API（`/api/...`）が CODH 側で停止中 |
+| Firebase ログイン（Google / Facebook / Twitter / Email） | ✅ 可 | 自前の Firebase プロジェクトを再利用し authFirebase.js の `firebaseConfig` を差し替え。Authorized domains に `nakamura196.github.io` を追加済み。FirebaseUI 3.x の `signInFlow` を `popup` に明示することで GitHub Pages サブパス + クエリパラメータ環境でも完了するように修正 |
+| キュレーションの新規作成 / 編集 / 保存 | ✅ 可 | 保存先を CODH の `mp.ex.nii.ac.jp/api/curation/json` から、自前の JSONkeeper 互換 API (Cloudflare Workers + D1 版を本流、PythonAnywhere 上流 Flask 版を fallback) に差し替え |
 | 既存 Curation JSON の URL を渡しての**閲覧** | ✅ 可 | `?curation=<url>` 形式で公開されている JSON を渡せば Viewer / Player は読み取り専用で動作します |
 | 既存 Manifest の URL を渡しての**閲覧** | ✅ 可 | `?manifest=<url>&canvas=<id>&xywh=...` で領域強調表示も含めて Viewer は動作します |
 
-別ドメイン用の Firebase プロジェクトを立てて authFirebase.js を差し替えることは技術的には可能ですが、結局 JSONkeeper 側も自前で立てる必要があり、スコープが大きく膨らむ割に「CODH のサービス再開までの暫定対応」という本リポジトリの趣旨から外れるため、本ミラーでは行っていません。
+> CODH 復旧時の撤収手順では、`curationJsonExportUrl` と `firebaseConfig` を `sed` で元の CODH 値に巻き戻すだけで純正構成に戻せるようにしてあります。
 
 本ミラーで動作確認できる用途は以下の通りです。
 
@@ -43,9 +43,16 @@ IIIF Curation Viewer / Manager / Editor / Board は、内部で **Firebase 認�
 |---|---|
 | `vdiff/`, `vdiff-seq/` | 画像比較（クエリパラメータで2 画像 URL を指定） |
 | `soan/` | くずし字画像生成（フロントエンド完結、kuromoji 辞書同梱） |
-| `iiif-curation-viewer/` | `?manifest=...` または `?curation=...` 付きの閲覧 |
+| `iiif-curation-viewer/` | `?manifest=...` または `?curation=...` 付きの閲覧、ログイン後の Curation 編集・保存 |
 | `iiif-curation-player/` | `?curation=...` 付きの閲覧（スライドショー） |
-| `iiif-curation-manager/` `iiif-curation-editor/` `iiif-curation-board/` | UI 確認程度（認証・保存は不可） |
+| `iiif-curation-manager/` `iiif-curation-editor/` `iiif-curation-board/` | ログイン後の Curation 新規作成・編集・保存 |
+
+## 参考: 構築・運用記録（外部記事）
+
+- [CODH ツール群の暫定ミラー専用リポジトリを GitHub Pages で立てる](https://tech.ldas.jp/ja/posts/codh-mirror-github-pages-setup/) — 本リポジトリの初期構築 (Wayback Machine からの復元 / GitHub Pages デプロイ / kuromoji 辞書欠落への対応など)
+- [codh-mirror に Firebase 認証と JSONkeeper 互換 API を後付けして IIIF Curation の編集ワークフローまで成立させる](https://tech.ldas.jp/ja/posts/codh-mirror-auth-storage-followup/) — 認証 + 保存系の有効化記録 (本セクションの背景)
+- [JSONkeeper を Cloudflare Workers + D1 で書き直した記録](https://tech.ldas.jp/ja/posts/jsonkeeper-cloudflare-workers-d1/) — 本流バックエンド (mp.ex.nii.ac.jp 代替)
+- [JSONkeeper を PythonAnywhere 無料プランに HTTP API だけでデプロイする](https://tech.ldas.jp/ja/posts/jsonkeeper-pythonanywhere-codh-mirror/) — 上流 Flask の fallback デプロイ
 
 ## ライセンスと出典表示
 
