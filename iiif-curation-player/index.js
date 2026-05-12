@@ -14,7 +14,7 @@ var iiifPlayer = (function() {
         generic_jsonKeeper: {
             trustedUrlPrefixes: ['https://', 'http://'], //無制限
             service: {
-                curationJsonExportUrl: 'https://mp.ex.nii.ac.jp/api/curation/json'
+                curationJsonExportUrl: 'https://jsonkeeper.na-kamura-1263.workers.dev/api'
             },
             descriptionDialog: {
                 //整数＋単位で指定（ピクセル単位であれば'px'、マップの大きさに対する相対指定であれば'%'）

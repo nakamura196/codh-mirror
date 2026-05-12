@@ -23,13 +23,13 @@ var iiifViewer = (function() {
         generic_jsonKeeper: {
             trustedUrlPrefixes: ['https://', 'http://'], //無制限
             service: {
-                curationJsonExportUrl: 'https://mp.ex.nii.ac.jp/api/curation/json'
+                curationJsonExportUrl: 'https://jsonkeeper.na-kamura-1263.workers.dev/api'
             }
         },
         generic_jsonKeeper_exhibition: {
             trustedUrlPrefixes: ['https://', 'http://'], //無制限
             service: {
-                curationJsonExportUrl: 'https://mp.ex.nii.ac.jp/api/curation/json'
+                curationJsonExportUrl: 'https://jsonkeeper.na-kamura-1263.workers.dev/api'
             },
             showOnLoaded: {
                 description: true
@@ -38,7 +38,7 @@ var iiifViewer = (function() {
         generic_jsonKeeper_enableRectangleMarkerEdit: {
             trustedUrlPrefixes: ['https://', 'http://'], //無制限
             service: {
-                curationJsonExportUrl: 'https://mp.ex.nii.ac.jp/api/curation/json'
+                curationJsonExportUrl: 'https://jsonkeeper.na-kamura-1263.workers.dev/api'
             },
             curation: {
                 enableRectangleMarkerEdit: true
@@ -47,7 +47,7 @@ var iiifViewer = (function() {
         generic_jsonKeeper_navPlace: {
             trustedUrlPrefixes: ['https://', 'http://'], //無制限
             service: {
-                curationJsonExportUrl: 'https://mp.ex.nii.ac.jp/api/curation/json',
+                curationJsonExportUrl: 'https://jsonkeeper.na-kamura-1263.workers.dev/api',
                 mapSelectorUrl: 'https://geoshape.ex.nii.ac.jp/map-selector/'
             },
             navPlaceMaps: [
@@ -258,7 +258,7 @@ var iiifViewer = (function() {
             ],
             trustedUrlPrefixes: ['https://', 'http://'], //無制限
             service: {
-                curationJsonExportUrl: 'https://mp.ex.nii.ac.jp/api/curation/json'
+                curationJsonExportUrl: 'https://jsonkeeper.na-kamura-1263.workers.dev/api'
             }
         }
     };

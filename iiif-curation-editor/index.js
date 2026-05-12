@@ -13,12 +13,12 @@ var iiifEditor = (function() {
     var configExample = {
         generic: {
             service: {
-                curationJsonExportUrl: 'https://mp.ex.nii.ac.jp/api/curation/json'
+                curationJsonExportUrl: 'https://jsonkeeper.na-kamura-1263.workers.dev/api'
             }
         },
         curation: {
             service: {
-                curationJsonExportUrl: 'https://mp.ex.nii.ac.jp/api/curation/json'
+                curationJsonExportUrl: 'https://jsonkeeper.na-kamura-1263.workers.dev/api'
             },
             jsonEditorOptions: {
                 schema: curationSchema

@@ -13,7 +13,7 @@ var iiifViewer = (function() {
     var configExample = {
         generic_jsonKeeper: {
             service: {
-                curationJsonExportUrl: 'https://mp.ex.nii.ac.jp/api/curation/json'
+                curationJsonExportUrl: 'https://jsonkeeper.na-kamura-1263.workers.dev/api'
             }
         }
     };
